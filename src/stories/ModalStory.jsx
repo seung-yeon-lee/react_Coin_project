@@ -57,4 +57,18 @@ storiesOf('Modal', module)
         </ModalConsumer>
       </div>
     </ModalProviderWithKey>
+  ))
+  .addWithJSX('DeletePrams', () => (
+    <ModalProviderWithKey>
+      <div>
+        <Text>다음버튼을 눌러 모달을 실행합니다</Text>
+        <ModalConsumer>
+          {({ openModal }) => (
+            <Button onPress={() => openModal(CONFIRM_DELETE_MODAL, { id: 1, name: '상품' })}>
+              모달열기
+            </Button>
+          )}
+        </ModalConsumer>
+      </div>
+    </ModalProviderWithKey>
   ));
