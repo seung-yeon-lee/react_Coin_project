@@ -1,1 +1,1 @@
-StoryBook , react-with-styles , axios, react-test-renderer , redux , contextAPI, sass
+StoryBook , react-with-styles , axios, react-test-renderer , redux , contextAPI, sass, enzyne, adapter
