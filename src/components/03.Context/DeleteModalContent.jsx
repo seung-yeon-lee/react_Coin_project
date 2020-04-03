@@ -10,7 +10,9 @@ export default function DeleteModalContent({ id, name }) {
       {({ CloseModal }) => (
         <div>
           <div>
-            <Text>{name}을 삭제하시겠습니까?</Text>
+            <Text>
+              {id}번쨰{name}을 삭제하시겠습니까?
+            </Text>
           </div>
           <Button primary>예 </Button>
           <Button onPress={CloseModal}>종료</Button>

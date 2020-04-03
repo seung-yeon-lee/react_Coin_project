@@ -30,6 +30,7 @@ export default withStyles(({ color, unit }) => ({
     //Modal Box
     verticalAlign: 'middle', // 가운데(수직)
   },
+
   container: {
     //내용 컨테이너
     margin: '40px auto 0px',
