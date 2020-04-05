@@ -6,11 +6,18 @@ import Button from '../../4.Design/Button';
 
 class ActionComponent1 extends PureComponent {
   render() {
-    const { setAge } = this.props;
-    // setAge() 프로퍼티로 전달된 콜백함수를 호출하도록 구현,
+    const { setAge, setUser, setCollection, setLoading } = this.props;
+    const collection = [
+      { id: 1, name: 'John', age: 20 },
+      { id: 2, name: 'Park', age: 40 },
+      { id: 3, name: 'Lee', age: 10 },
+    ];
     return (
       <>
-        <Button onPress={() => setAge(1, 77)}>Id값이 1번인 대상 age를 77로 변경</Button>
+        <Button onPress={() => setLoading(true)}>SetLoading</Button>
+        <Button onPress={() => setCollection(collection)}>SetCollection</Button>
+        <Button onPress={() => setUser({ name: 'Choi', age: 20 })}>SetUser</Button>
+        <Button onPress={() => setAge(1, 55)}>SetAge</Button>
       </>
     );
   }
@@ -18,14 +25,9 @@ class ActionComponent1 extends PureComponent {
 
 ActionComponent1.propTypes = {
   setAge: PropTypes.func,
+  setUser: PropTypes.func,
+  setCollection: PropTypes.func,
+  setLoading: PropTypes.func,
 };
 
 export default ActionComponent1;
-
-// //id age 수정
-// export const SET_AGE = 'set_age';
-
-// export const setAge = (id, age) => ({
-//   type: SET_AGE,
-//   payload: { id, age },
-// });

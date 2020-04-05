@@ -13,7 +13,7 @@ export default (state = initState, action) => {
   switch (type) {
     case SET_COLLECTION: {
       // payload 하위에 ids와 entities를 저장
-      const ids = payload.map(entity => entity['id']); //배열 객체 id값 추출
+      const ids = payload.map((entity) => entity['id']); //배열 객체 id값 추출
       const entities = payload.reduce(
         (finalEntities, entity) => ({
           // 실제 데이터, 객체로 변환한 다음 entities에 저장하며 객체의 키로 entitiy['id]사용
@@ -24,6 +24,7 @@ export default (state = initState, action) => {
       );
       return { ...state, ids, entities };
     }
+
     case SET_AGE: {
       const { id, age } = payload;
       return {

@@ -6,10 +6,10 @@ class InputWithStyle extends PureComponent {
     super(props);
     this.state = {};
   }
-  handelChange = e => {
+  handelChange = (e) => {
     const { onChange, name } = this.props;
     if (onChange) {
-      onChange(e.target.value);
+      onChange(name, e.target.value);
     }
   };
 
@@ -26,11 +26,11 @@ class InputWithStyle extends PureComponent {
       this.ref.focus();
     }
   }
-  setRef = ref => {
+  setRef = (ref) => {
     this.ref = ref;
   };
   render() {
-    const { errorMessage, label, name, value, type } = this.props;
+    const { errorMessage, label, name, value, type, disabled } = this.props;
     return (
       <div className="input-field">
         {' '}
@@ -43,7 +43,7 @@ class InputWithStyle extends PureComponent {
           onChange={this.handelChange}
           value={value}
         />
-        <label className="active" for={`input_${name}`}>
+        <label className="active" htmlFor={`input_${name}`}>
           {/* Label 이름 클릭 시 마우스 커서가 입력 항목으로 이동하도록 htmlFor 적용 */}
           {label}
         </label>
