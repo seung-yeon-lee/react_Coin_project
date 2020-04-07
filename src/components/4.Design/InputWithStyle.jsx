@@ -7,9 +7,9 @@ class InputWithStyle extends PureComponent {
     this.state = {};
   }
   handelChange = (e) => {
-    const { onChange, name } = this.props;
+    const { onChange, name, type } = this.props;
     if (onChange) {
-      onChange(name, e.target.value);
+      onChange(name, e.target.value, type);
     }
   };
 

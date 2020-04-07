@@ -159,15 +159,19 @@
 // );
 // console.log(entities);
 
-const payload = [{ id: 1, languages: 'JavaScript', FrameWork: 'React', DataBase: 'Mysql' }];
-const id = payload.map((v) => v['id']);
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, css } from './withStyles';
+const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
-const result = payload.reduce(
-  (initialState, state) => ({
-    ...initialState,
-    [state['id']]: state,
-  }),
-  {},
-);
-
-console.log(result);
+class Heading extends PureComponent {
+  render() {
+    const { children, inverse, level, styles } = this.props;
+    const HeadingTag = headingTags[level - 1];
+    return (
+      <HeadingTag {...css(styles.default, styles[`level${level}`], inverse && styles.inverse)}>
+        {children}
+      </HeadingTag>
+    );
+  }
+}

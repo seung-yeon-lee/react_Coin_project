@@ -1,0 +1,10 @@
+/* 전체 스타일 파일 작성, 앞서 작성한건 component 구성할떄 사용, 전체 스타일은 따로 */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #eeeeee;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

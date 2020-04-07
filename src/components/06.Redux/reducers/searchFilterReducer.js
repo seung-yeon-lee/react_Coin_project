@@ -10,7 +10,7 @@ export default function reducer(state = initState, action) {
       const { filterName, value } = payload;
       return {
         ...state,
-        [filterName]: value,
+        [filterName]: value, // ex) name: 'React' , age: 20
         // 기존 검색 항목과 새 검색 항목을 객체 형태로 병합.
         // ex) {name:'hello'}인 state에서, { age: 20}이 병합되면 2개의 검색 조건 검색 가능
       };

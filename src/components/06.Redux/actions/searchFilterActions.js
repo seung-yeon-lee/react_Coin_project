@@ -1,4 +1,4 @@
-//자료를 검색하기 위해 단어를 스토어에 저장
+//자료를 검색하기 위해 단어를 스토어에 저장, Action 설정
 export const SET_FILTER = 'searchFilter/set_filter';
 export const RESET_FILTER = 'searchFilter/reset_filter';
 

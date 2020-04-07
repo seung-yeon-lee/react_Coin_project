@@ -23,7 +23,15 @@ const mapStateToProps = (state) => {
           true,
         ),
     );
+
+  console.log(ids);
   return { items };
 };
 
 export default connect(mapStateToProps)(SearchResultTable);
+
+let search = { id: 1, name: 'react' };
+
+let result = Object.values(search);
+
+result.reduce((ac, af) => ac || Boolean(af), false);

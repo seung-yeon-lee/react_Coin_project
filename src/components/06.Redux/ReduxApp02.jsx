@@ -19,15 +19,18 @@ class ReduxApp extends PureComponent {
       setCollection([
         { id: 1, name: 'React', age: 20 },
         { id: 2, name: 'NodeJS', age: 30 },
+        { id: 3, name: 'Redux', age: 32 },
+        { id: 4, name: 'Component', age: 40 },
+        { id: 5, name: 'Hooks', age: 50 },
       ]),
     );
 
     this.store.dispatch(setAge(1, 10));
 
-    const { collection } = this.store.getState();
-    const { ids, entities } = collection;
-    const originalPayload = ids.map((id) => entities[id]);
-    console.log(originalPayload);
+    // const { collection } = this.store.getState();
+    // const { ids, entities } = collection;
+    // const originalPayload = ids.map((id) => entities[id]);
+    // console.log(originalPayload);
   }
   render() {
     return (
@@ -41,11 +44,11 @@ class ReduxApp extends PureComponent {
           <SearchFilterButtonContainer>리셋</SearchFilterButtonContainer>
         </fieldset>
         <SearchResultTabelContainer />
-        화면 컴포넌트: <PresentationComponent userName="화면 전용 컴포넌트" />
+        {/* 화면 컴포넌트: <PresentationComponent userName="화면 전용 컴포넌트" />
         <br />
         데이터 컴포넌트: <ContainerComponent id={1} />
         <br />
-        액션 컴포넌트 <DispatchContainer01 />
+        액션 컴포넌트 <DispatchContainer01 /> */}
       </Provider>
     );
   }
