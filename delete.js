@@ -117,6 +117,16 @@
 //   }
 // }
 
+// const higherOrderComponent = url => WrappedComponent{
+//   return class extends Component{
+//     render(){
+//       return(
+//         <WrappedComponent { ...this.props} />
+//       )
+//     }
+//   }
+// }
+
 // export default Delete;
 
 // // Hoc 원리
@@ -159,19 +169,55 @@
 // );
 // console.log(entities);
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles, css } from './withStyles';
-const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+// let obj = {
+//   key1: 'one',
+//   key2: 'two',
+// };
 
-class Heading extends PureComponent {
-  render() {
-    const { children, inverse, level, styles } = this.props;
-    const HeadingTag = headingTags[level - 1];
-    return (
-      <HeadingTag {...css(styles.default, styles[`level${level}`], inverse && styles.inverse)}>
-        {children}
-      </HeadingTag>
-    );
-  }
-}
+// const { key1: newKey, key2, key3 = 'defulat' } = obj;
+
+// console.log(newKey);
+
+// export default function withHoc(WrappedComponent){
+//   return class WithHoc extends React.Component{
+//     render(){
+//       return <WrappedComponent {...this.props} />
+//     }
+//   }
+// }
+// withHoc의 인자로 기존 component가 parameter로 들어오고
+// return 부분은 기존 컴포넌트에 기능을 추가, 즉 확장 컴포넌트
+// 기존 컴포넌트의 props를 그대로 보내 줘야함
+
+// ex)
+//  button 임포트 후
+
+// const ButtonWithHoc(button)
+
+// import React from 'react';
+
+// export default function(loadingMessage = '로딩 중') {
+//   return WrappedComponent => {
+//     const { displayName, name: componentName } = WrappedComponent;
+//     const wrappedComponentName = displayName || componentName;
+//     function withLoading({ isLoading, props }) {
+//       if (isLoading) return loadingMessage;
+//       return <WrappedComponent {...props} />;
+//     }
+//     withLoading.displayName = `withloading(${wrappedComponentName})`;
+//     return withLoading;
+//   };
+// }
+
+// export default errorMessage => {
+//   return WrappedComponent => {
+//     const { displayName, name: componentName } = WrappedComponent;
+//     const wrappedComponentName = displayName || componentName;
+//     function withLoading({ isloading, openModal, ...props }) {
+//       if (isloading && openModal) return errorMessage;
+//       return <WrappedComponent {...props} />;
+//     }
+//     withLoading.displayName = `withLoading(${wrappedComponentName})`;
+//     return withLoading;
+//   };
+// };

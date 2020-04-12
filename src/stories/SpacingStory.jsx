@@ -5,6 +5,8 @@ import Spacing from '../Create_Coin_WebSite/Spacing';
 import Card from '../Create_Coin_WebSite/Card';
 import Text from '../Create_Coin_WebSite/Text';
 import LineList from '../Create_Coin_WebSite/InlineList';
+import Heading from '../Create_Coin_WebSite/Heading';
+import Toast from '../Create_Coin_WebSite/Toast';
 
 function RedBox({ children }) {
   return (
@@ -36,7 +38,7 @@ storiesOf('Spacing', module)
       <Spacing horizontal={5}>
         <RedBox>horizontal:5</RedBox>
       </Spacing>
-      <Spacing vertical={6}>
+      <Spacing vertical={10}>
         <RedBox>vertical:6</RedBox>
       </Spacing>
     </RedBox>
@@ -51,4 +53,16 @@ storiesOf('Spacing', module)
         </LineList>
       </Card>
     </RedBox>
+  ))
+  .addWithJSX('Heading', () => (
+    <>
+      <Heading level={1}>Level1</Heading>
+      <Heading level={2}>Level2</Heading>
+      <Heading level={3}>Level3</Heading>
+    </>
+  ))
+  .addWithJSX('Toast', () => (
+    <>
+      <Toast warning message="error"></Toast>
+    </>
   ));

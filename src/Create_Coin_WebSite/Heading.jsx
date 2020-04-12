@@ -9,7 +9,7 @@ class Heading extends PureComponent {
   render() {
     const { children, inverse, level, styles } = this.props;
 
-    const HeadingTag = headingTags[level - 1];
+    const HeadingTag = headingTags[level - 1]; // -1 기본값
 
     return (
       <HeadingTag {...css(styles.default, styles[`level${level}`], inverse && styles.inverse)}>
