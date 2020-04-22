@@ -1,0 +1,26 @@
+{
+  "transactions": [
+    {
+      "id": "1",
+      "code": "BTX",
+      "name": "비트코인(BTX)",
+      "totalPrice": "123,123,111,000원",
+      "currentPrice": "4,200,000원",
+      "datetime": "2020/04/14 08:23:22"
+    },
+    {
+      "id": "2",
+      "code": "RXP",
+      "name": "리플(RXP)",
+      "totalPrice": "323,123,111,000원",
+      "currentPrice": "8,200,000원",
+      "datetime": "2020/04/14 08:23:22"
+    },
+    {
+      "currentPrice": "Components",
+      "amount": "55",
+      "name": "Data Connecting Test",
+      "id": "maN0ymZ"
+    }
+  ]
+}

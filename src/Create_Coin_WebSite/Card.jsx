@@ -26,7 +26,7 @@ export default withStyles(({ depth, unit, color }) => ({
   wrapper: {
     ...depth.level1,
     borderRadius: unit,
-    backgroundColor: color.gray,
+    backgroundColor: color.white,
     display: 'flex',
     overflow: 'hidden',
     marginBottom: unit * 4,

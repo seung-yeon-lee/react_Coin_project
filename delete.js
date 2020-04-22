@@ -221,3 +221,50 @@
 //     return withLoading;
 //   };
 // };
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, css, withStylesPropTypes } from './withStyles';
+import Option from './Option';
+
+export { Option };
+
+class Select extends PureComponent {
+  state = {
+    focused: false,
+  };
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      this.refs.focus();
+    }
+  }
+  handleFocus = () => {
+    this.setState({ focused: true });
+  };
+  handleBlur = () => {
+    this.setState({ focused: false });
+  };
+  setRef = ref => {
+    this.ref = ref;
+  };
+  handleChange = e => {
+    const { name, onChange } = this.props;
+    if (onChange) {
+      onChange(name, e.target.value);
+    }
+  };
+  render() {
+    const {
+      children,
+      disabled,
+      errorMessage,
+      label,
+      value,
+      name,
+      styles,
+      large,
+      xlarge,
+      small,
+      xsmall,
+    } = this.props;
+  }
+}
