@@ -1,4 +1,5 @@
-// Form 컴포넌트, 공용 컴포넌트를 추가하여 입력 항목 처리, initValues props로 state 동기화
+// Form 컴포넌트, 공용 컴포넌트를 추가하여 입력 항목 처리,
+// initValues props로 state 동기화
 import React from 'react';
 import PropTypes from 'prop-types';
 

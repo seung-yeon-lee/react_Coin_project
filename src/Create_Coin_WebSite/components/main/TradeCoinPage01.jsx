@@ -8,7 +8,6 @@ import Input from '../../Input';
 import Button from '../../Button';
 import InlineList from '../../InlineList';
 import Form from '../../Form';
-import Api from '../../Api';
 import { Consumer as Modal } from '../../Modal/context';
 
 class TradeCoinPage extends PureComponent {
@@ -19,9 +18,8 @@ class TradeCoinPage extends PureComponent {
       code,
       name,
     };
-    console.log(formValues);
-    Api.post('/transactions', formValues) // post를 호출하여, 거래내역(transaction) 생성
-      .then(() => closeModal()); //거래 요청 마친 후 자동으로 모달창 close
+    createTransaction(formValues, closeModal);
+    //2번쨰 인자로 closeModal 콜백함수가 두번쨰 인자로 전달
   };
 
   render() {

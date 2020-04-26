@@ -7,16 +7,23 @@ import Text from '../../Text';
 import Input from '../../Input';
 import Form from '../../Form';
 import Select, { Option } from '../../Select';
-import Api from '../../Api';
 
 //onSubmit 프로퍼티로 전달 받은 콜백은 Form 컴포넌트에서 전달받은 HandleSubmit 콜백함수,
 // handleSubmit 콜백의 인자로 전달한 valuse의 구조는 params에 넘겨 줄 값의 구조와 같음
 
 class TransactionSearchFilter extends PureComponent {
-  //Form 컴포넌트에서 Submit 이벤트가 발생하면 handleSubmit 호출, 이어서 setTransactionList()액션 함수가 호출
+  //Form 컴포넌트에서 Submit 이벤트가 발생하면 handleSubmit 호출,
+  // 이어서 setTransactionList()액션 함수가 호출
   handleSubmit = params => {
-    const { setTransactionList } = this.props;
-    Api.get('/transaction', { params }).then(({ data }) => setTransactionList(data));
+    const { requestTransactionList } = this.props;
+
+    const cleanedParams = Object.entries(params)
+      .filter(([key, value]) => value !== '') //빈값이 아닌 항목 찾기
+      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {}); //배열을 다시 객체로 변환
+    requestTransactionList(cleanedParams);
+
+    // const { setTransactionList } = this.props;
+    // Api.get('/transaction', { params }).then(({ data }) => setTransactionList(data));
     //redux store data 변경
   };
   render() {
@@ -58,6 +65,6 @@ class TransactionSearchFilter extends PureComponent {
 }
 
 TransactionSearchFilter.propTypes = {
-  setTransactionList: propTypes.func,
+  requestTransactionList: propTypes.func,
 };
 export default TransactionSearchFilter;

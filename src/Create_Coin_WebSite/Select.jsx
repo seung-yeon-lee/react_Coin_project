@@ -23,6 +23,7 @@ class Select extends PureComponent {
     const { name, onChange } = this.props;
     if (onChange) {
       onChange(name, e.target.value); // code, 선택한value
+      // console.log(e.target.value);
     }
   };
   componentDidMount() {

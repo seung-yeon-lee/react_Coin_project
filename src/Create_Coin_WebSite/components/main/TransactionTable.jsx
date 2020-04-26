@@ -6,6 +6,20 @@ import TableHead from '../../TableHead';
 import TableRow from '../../TableRow';
 import TableCell from '../../TableCell';
 
+import Text from '../../Text';
+import Spacing from '../../Spacing';
+import WithLoading from '../../../components/02.Hoc/withLoading';
+import InlineList from '../../InlineList';
+//로딩 화면 표시 하기 위해 import
+
+const LoadingMessage = (
+  <Spacing vertical={4} horizontal={2}>
+    <InlineList align="center">
+      <Text large>데이터를 불러오고 있습니다</Text>
+    </InlineList>
+  </Spacing>
+);
+
 class TransactionTable extends PureComponent {
   render() {
     const { transaction } = this.props;
@@ -45,4 +59,4 @@ TransactionTable.propTypes = {
   ),
 };
 
-export default TransactionTable;
+export default WithLoading(LoadingMessage)(TransactionTable);
