@@ -4,7 +4,9 @@
 
 import { connect } from 'react-redux';
 import TransactionSearchFilter from '../../components/main/TransactionSearchFilter';
-import { requestTransactionList } from '../../actions/TransactionActions';
+// import { requestTransactionList } from '../../actions/TransactionActions';
+import { requestTransactionList } from '../../actions/transactionPackActions';
+// redux-pack으로 작성한 action import , after => 액션에 대응하는 reducer 수정
 
 export default connect(null, { requestTransactionList })(TransactionSearchFilter);
 //앞에서 만든 data 컴포넌트와 연결, 액션만 전달하므로 null

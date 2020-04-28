@@ -33,6 +33,24 @@
       "amount": "kk",
       "name": "Ethereum",
       "id": "ONF4OqN"
+    },
+    {
+      "currentPrice": "4,212,000원",
+      "amount": "123",
+      "name": "BitCoin",
+      "id": "ytA216C"
+    },
+    {
+      "currentPrice": "4,212,000원",
+      "amount": "123",
+      "name": "BitCoin",
+      "id": "bexv4w6"
+    },
+    {
+      "currentPrice": "216,000원",
+      "amount": "123123",
+      "name": "Ethereum",
+      "id": "EVzq_qC"
     }
   ]
 }
