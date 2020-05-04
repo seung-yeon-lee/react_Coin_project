@@ -4,6 +4,8 @@ import Heading from '../../Heading';
 import Card from '../../Card';
 import TransactionSearchFilterContainer from '../../containers/main/TransactionSearchFilterContainer';
 import TransactionTable from './TransactionTable';
+//페이지 이동 버튼 추가하기
+import TransactionPaginationContainer from '../../containers/main/TransactionPaginationContainer';
 
 class TransactionList extends PureComponent {
   componentDidMount() {
@@ -23,6 +25,7 @@ class TransactionList extends PureComponent {
         <Card>
           <TransactionTable transaction={transactions} isLoadings={loading} />
         </Card>
+        <TransactionPaginationContainer />
       </div>
     );
   }

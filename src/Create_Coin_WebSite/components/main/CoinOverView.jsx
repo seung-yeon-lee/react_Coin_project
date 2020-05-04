@@ -11,7 +11,7 @@ class CoinOverview extends PureComponent {
         <InlineList>
           <CoinDashlet name="BitCoin" priceLabel="4,212,000원"></CoinDashlet>
           <CoinDashlet name="Ethereum" priceLabel="216,000원"></CoinDashlet>
-          <CoinDashlet name="DoitCoin" priceLabel="10,000원"></CoinDashlet>
+          <CoinDashlet name="CoinOne" priceLabel="10,000원"></CoinDashlet>
           <CoinDashlet name="Data Connecting Test" priceLabel="Components" />
         </InlineList>
       </>

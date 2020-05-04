@@ -23,7 +23,7 @@ class TradeCoinPage extends PureComponent {
   };
 
   render() {
-    const { name, price, type } = this.props;
+    const { name, price, type, loading } = this.props;
     const typeName = type === 'sell' ? '판매' : '구매';
     return (
       <Modal>
@@ -57,8 +57,14 @@ class TradeCoinPage extends PureComponent {
                     />
                   </Spacing>
                   <InlineList spacingBetween={1}>
-                    <Button primary>{typeName}</Button>
-                    <Button onPress={closeModal}>취소</Button>
+                    <Button primary disabled={loading}>
+                      {loading ? '거래처리중' : typeName}
+                      {/* loading프로퍼티 값에 따라 판매/구매 버튼 메시지를 변경하여 로딩 상태표시
+                      처리중일떄는 버튼을 비활성화 하여 두번 눌리는 것을 방지 */}
+                    </Button>
+                    <Button onPress={closeModal} disabled={loading}>
+                      취소
+                    </Button>
                   </InlineList>
                 </Spacing>
               )}

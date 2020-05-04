@@ -15,12 +15,13 @@ class TransactionSearchFilter extends PureComponent {
   //Form 컴포넌트에서 Submit 이벤트가 발생하면 handleSubmit 호출,
   // 이어서 setTransactionList()액션 함수가 호출
   handleSubmit = params => {
-    const { requestTransactionList } = this.props;
-
+    const { requestTransactionList, setFilter } = this.props;
+    //data compo 에서 연결한 setFilter 함수
     const cleanedParams = Object.entries(params)
       .filter(([key, value]) => value !== '') //빈값이 아닌 항목 찾기
       .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {}); //배열을 다시 객체로 변환
     requestTransactionList(cleanedParams);
+    setFilter(cleanedParams);
 
     // const { setTransactionList } = this.props;
     // Api.get('/transaction', { params }).then(({ data }) => setTransactionList(data));
@@ -39,7 +40,7 @@ class TransactionSearchFilter extends PureComponent {
                 <Option label="선택해주세요" value="SELECT" />
                 <Option label="비트코인(BTX)" value="BTX" />
                 <Option label="이더리움(ETH)" value="ETH" />
-                <Option label="코인원(COINONE)" value="COIN" />
+                <Option label="코인원(COINONE)" value="COINONE" />
               </Select>
               <Input
                 name="CurrentPrice_gte"
@@ -66,5 +67,6 @@ class TransactionSearchFilter extends PureComponent {
 
 TransactionSearchFilter.propTypes = {
   requestTransactionList: propTypes.func,
+  setFilter: propTypes.func,
 };
 export default TransactionSearchFilter;

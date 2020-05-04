@@ -22,7 +22,7 @@ AppLayout.propTypes = {
 
 export default withStyles(({ unit }) => ({
   wrapper: {
-    marginTop: HEIGHT,
+    // marginTop: HEIGHT,
   },
   body: {
     padding: unit * 4,
