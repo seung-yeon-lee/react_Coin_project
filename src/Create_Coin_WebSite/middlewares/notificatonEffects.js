@@ -28,7 +28,7 @@ const debounceRunner = debounce(action => action(), 3000);
 //   } else if (type === FETCH_TRANSACTION_LIST && meta[KEY.LIFECYCLE] === LIFECYCLE.SUCCESS) {
 //     const message = '거래 목록이 최신 정보로 업데이트 되었습니다.';
 //     store.dispatch(showMessage(message));
-//     // const hide = () => store.dispatch(hideMessage());
+//     // czonst hide = () => store.dispatch(hideMessage());
 //     // // setTimeout(hide, 3000);
 //     // debounceRunner(hide);
 //   }
