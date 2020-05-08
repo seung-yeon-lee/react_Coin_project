@@ -1,7 +1,7 @@
 //Data Component 작성
 import {
   transactionListSelector,
-  loadingStateSelector,
+  transactionListLoadingStateSelector,
 } from '../../selectors/transactionSelectors';
 // 작성한 셀렉터 import
 import { connect } from 'react-redux';
@@ -21,7 +21,10 @@ const mapStateToProps = state => {
   // const transactions = ids.map(id => entities[id]);
   // return { transactions, loading };
   // 셀렉터 적용 code
-  return { transactions: transactionListSelector(state), loading: loadingStateSelector(state) };
+  return {
+    transactions: transactionListSelector(state),
+    loading: transactionListLoadingStateSelector(state),
+  };
   // paginationContainer 데이터 컴포넌트에도 적용 예정
 };
 const mapDispatchToProps = {

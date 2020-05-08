@@ -1,135 +1,150 @@
-import {
-    SET_TRANSACTION_LIST,
-    LOADING_TRANSACTION_LIST,
-    SET_ERROR,
-  } from '../actions/TransactionActions';
-  import { handle } from 'redux-pack';
-  import { FETCH_TRANSACTION_LIST, CREATE_TRANSACTION } from '../actions/transactionPackActions';
-  
-  const initState={
-      ids:[],
-      entities: {},
-      loadingState:{
-          [CREATE_TRANSACTION]:false,
-          [FETCH_TRANSACTION_LIST]:false,
-      },
-      errorState={
-        [CREATE_TRANSACTION]:false,
-        [FETCH_TRANSACTION_LIST]:false,
-      },
-      pagination: {},
-      pages:{},
-  };
-  // redux-thunk version code
-  export default (state = initState, action) => {
-      const { type, payload, meta} = action;
-      switch(type){
-          case SET_ERROR:{
-              const { errorMessage } = payload;
-              return{
-                  ...state,
-                  loading: false,
-                  hasError: true,
-                  errorMessage,
-              }
-          }
-          case LOADING_TRANSACTION_LIST:{
-              return{
-                  ...state,
-                  loading: true,
-                  hasError: false,
-              }
-          };
-          case SET_TRANSACTION_LIST:{
-              const ids = payload.map(entity => entity['id']);
-              const entities = payload.reduce(
-                  (finalEntities, entity) => ({
-                      ...finalEntities,
-                      [entity['id']]: entity,
-                  }),
-                  {},
-              )
-              return{ ...state, ids, entities, loading:  false, hasError: false}
-          }
-          // redux-pack version code 바꾼 action들에 대한 reducer 수정
-          case CREATE_TRANSACTION:
-            case FETCH_TRANSACTION_LIST: {
-                return handle(state,action, {
-                    // LOADING_TRANSACTION_LIST와 동일
-                    start: prevState => ({
-                        ...prevState,
-                        loadingState:{
-                            ...prevState.loadingState,
-                            [type]: true,
-                        },
-                        errorState:{
-                            ...prevState.errorState,
-                            [type]: false,
-                        }
-                    }),
-                    // SET_TRANSACTION_LIST와 동일
-                    success: prevState => {
-                        const { data } = payload;
-                        const loadingAndErrorState={
-                            loadingState:{
-                                ...prevState.loadingState,
-                                [type]: false,
-                            },
-                            errorState:{
-                                ...prevState.errorState,
-                                [type]: false,
-                            }
-                        };
-                        if(type === FETCH_TRANSACTION_LIST){
-                            const { pageNumber, pageSize} = meta || {};
-                            const ids = data.map(entity => entity['id']);
-                            const entities = data.reduce(
-                                (finalEntities,entity) =>({
-                                    ...finalEntities,
-                                    [entity['id']]: entity,
-                                }),
-                                {},
-                            );
-                            return{
-                                ...prevState,
-                                ...loadingAndErrorState,
-                                ids,
-                                entities: { ...prevState.entities, ...entities},
-                                pagination: {
-                                    number: pageNumber,
-                                    size: pageSize,
-                                },
-                                pages: {
-                                    ...prevState.pages,
-                                    [pageNumber]: ids,
-                                }
-                            }
-                        }else{
-                            const id = data['id'];
-                            return{
-                                ...prevState,
-                                ...loadingAndErrorState,
-                                id,
-                                entities: { ...prevState.entities, [id]: data}
-                            }
-                        }
-                    },
-                    failure: prevState => {
-                        const { errorMessage } = payload.response.data;
-                        return{
-                            ...prevState,
-                            loadingState:{
-                                ...prevState.loadingState,
-                                [type]: false,
-                            },
-                            errorState:{
-                                ...prevState.errorState,
-                                [type]: errorMessage || true
-                            }
-                        }
-                    }
-                })
-            }
-      }
-  }
- 
+// import { handle } from 'redux-pack';
+// import { CREATE, UPDATE, FETCH, FETCH_LIST, RESET } from './actionTypes';
+
+// // 리듀서 모듈화 작업, 인자로 전달된 이름맞게 return
+// // 서로 다른 데이터를 처리할때 같은 action 사용, 액션에 포함시킨
+// //meta의 resourceName과 리듀서의 이름이 일치한 경우에만 실행되도록 구현
+
+// export default (...reducerNames) => {
+//   return reducerNames.reduce((apiReducer, name) => {
+//     const initState={
+//       ids:[],
+//       entities: {},
+//       loadingState:{
+//         [`${CREATE}/${name}`]: false,
+//         [`${FETCH}/${name}`]: false,
+//         [`${UPDATE}/${name}`]: false,
+//         [`${FETCH_LIST}/${name}`]: false,
+//       },
+//       errorState:{
+//         [`${CREATE}/${name}`]: false,
+//         [`${FETCH}/${name}`]: false,
+//         [`${UPDATE}/${name}`]: false,
+//         [`${FETCH_LIST}/${name}`]: false,
+//       },
+//       pagination:{},
+//     };
+//     apiReducer[name] = (state=initState, action) => {
+//       const { type, payload, meta} = action;
+//       const {resourceName, key} = meta || {}; //action meta 참조
+//       if(resourceName !== name){
+//         // resouceName과 reducer name이 일치하지않다면 그냥 반환
+//         return state;
+//       };
+//       switch(type){
+//         case UPDATE:
+//         case FETCH:
+//         case CREATE:
+//         case FETCH_LIST:{
+//           return handle(state, action, {
+//             start: prevState => ({
+//               ...prevState,
+//               loadingState:{
+//                 ...prevState.loadingState,
+//                 [`${type}/${name}`]: true,
+//               },
+//               errorState:{
+//                 ...prevState.errorState,
+//                 [`${type}/${name}`]: false,
+//               },
+//             }),
+//             success: prevState => {
+//               const { data } = payload;
+//               if(type === FETCH_LIST){
+//                  const { pageNumber, pageSize} = meta || {};
+//                  const ids = data.map(entity => entity[key]);
+//                  const entities = data.reduce(
+//                   (finalEntities, entitiy) => ({
+//                     ...finalEntities,
+//                     [entity[key]]: entitiy,
+//                     //ex) bitcoin : { id: btx01, code: bitcoin ... }
+//                     // result  btx01 : { id: btx01, code ....} 이런 형식으로 저장
+//                     // key 부분은 = key= 'id'로 할당, 곧 결과값에 id를 key 값으로 쓰고,
+//                     // 나머지 데이터를 value 로 쓰겠다
+//                    }),
+//                    {},
+//                  );
+//                  return{
+//                    ...prevState,
+//                    ids,
+//                    entities: { ...prevState.entities, ...entities},
+//                    loadingState: {
+//                      ...prevState.loadingState,
+//                      [`${type}/${name}`]: false,
+//                    },
+//                    errorState:{
+//                      ...prevState.errorState,
+//                      [`${type}/${name}`]: false,
+//                    }
+//                  }
+//               }
+//             },
+//             failure: prevState => {
+//               const { errorMessage } = payload.response? payload.response.data : {}
+//               return{
+//                 ...prevState,
+//                 loadingState: {
+//                   ...prevState.loadingState,
+//                   [`${type}/${name}`]: false,
+//                 },
+//                 errorState:{
+//                   ...prevState.errorState,
+//                   [`${type}/${name}`]: errorMessage || true,
+//                 }
+//               }
+//             }
+//           })
+//         }
+//       }
+
+//     }
+//   },{})
+// }
+
+import { FETCH_LIST, UPDATE, CREATE, RESET, FETCH } from './actionTypes';
+import Api from '../Api';
+
+// //Router 나가기 전에 한번 빠르게 훑어 보고
+
+// export default (resourceName, key = 'id') => ({
+//   collection: (params = {}, meta = {}) => ({
+//     type: FETCH_LIST,
+//     promise: Api.get(resourceName, { params }),
+//     meta: { ...meta, key, resourceName },
+//   }),
+//   member: (id, params = {}, meta = {}) => ({
+//     type: FETCH,
+//     promise: Api.get(`${resourceName}/${id}`, { params }),
+//     meta: { ...meta, key, resourceName },
+//   }),
+//   create: (data, params = {}, meta = {}) => ({
+//     type: CREATE,
+//     promise: Api.post(resourceName, data, { params }),
+//     meta: { ...meta, key, resourceName },
+//   }),
+//   update: (id, data, params = {}, meta = {}) => ({
+//     type: UPDATE,
+//     promise: Api.put(`${resourceName}/${id}`, data, { params }),
+//     meta: { ...meta, key, resouceName },
+//   }),
+//   reset: () => ({
+//     type: RESET,
+//     meta: { resourceName },
+//
+export default (resourceName, key = 'id') => ({
+  collection: (params = {}, meta = {}) => ({
+    type: FETCH_LIST,
+    promise: Api.get(resourceName, { params }),
+    meta: { ...meta, key, resourceName },
+  }),
+  member: (id, params = {}, meta = {}) => ({
+    type: FETCH,
+    promise: Api.get(`${resourceName}/${id}`, { params }),
+    meta: { ...meta, key, resourceName },
+  }),
+  create: (data, params = {}, meta = {}) => ({
+    type: CREATE,
+    promise: Api.post(resourceName, data, { params }),
+    meta: { ...meta, key, resourceName },
+  }),
+});

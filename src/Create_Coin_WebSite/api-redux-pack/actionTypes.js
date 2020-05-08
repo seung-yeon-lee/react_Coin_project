@@ -3,8 +3,8 @@
 
 //액션 모듈화(목록읽기,읽기,수정,초기화에 대한 action type을 구현)
 
-export const FETCH_LIST = 'api-redux-pack/FETCH_LIST';
-export const FETCH = 'api-redux-pack/FETCH';
-export const UPDATE = 'api-redux-pack/UPDATE';
-export const CREATE = 'api-redux-pack/CREATE';
-export const RESET = 'api-redux-pack/RESET';
+export const FETCH_LIST = 'api-redux-pack/FETCH_LIST'; //목록전체
+export const FETCH = 'api-redux-pack/FETCH'; // 목록읽기
+export const UPDATE = 'api-redux-pack/UPDATE'; // 수정
+export const CREATE = 'api-redux-pack/CREATE'; // 생성
+export const RESET = 'api-redux-pack/RESET'; // 초기화

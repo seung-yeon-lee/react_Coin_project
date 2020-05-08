@@ -7,17 +7,17 @@ import {
   requestTransactionList,
   FETCH_TRANSACTION_LIST,
 } from '../../actions/transactionPackActions';
-import { loadingStateSelector } from '../../selectors/transactionSelectors';
+import { transactionListLoadingStateSelector } from '../../selectors/transactionSelectors';
 
 const mapStateToProps = state => {
-  const { pagination } = state.transactions;
+  const { pagination, ids } = state.transactions;
   // const loading = loadingState[FETCH_TRANSACTION_LIST];
-  const { number } = pagination;
+  const { number, size } = pagination;
   return {
-    // searchParams: state.searchFilter.params, //검색입력 스토어 데이터 연결
+    searchParams: state.searchFilter.params, //검색입력 스토어 데이터 연결
     pageNumber: number || 1,
-    loading: loadingStateSelector(state),
-    //   hasNext: ids.length === size,
+    loading: transactionListLoadingStateSelector(state),
+    hasNext: ids.length === size,
     //   // 결과목록의 개수가 페이지 크기와 같을 경우 다음 페이지가 존재한다고 가정
     //   loading,
     // };

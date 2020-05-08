@@ -18,6 +18,7 @@ class TradeCoinPage extends PureComponent {
       code,
       name,
     };
+    console.log(formValues);
     createTransaction(formValues, closeModal);
     //2번쨰 인자로 closeModal 콜백함수가 두번쨰 인자로 전달
   };

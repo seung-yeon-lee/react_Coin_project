@@ -11,8 +11,8 @@ class TransactionPagination extends PureComponent {
     requestTransactionList(searchParams, pageNumber + 1);
   };
   handlePrevPress = () => {
-    const { requrestTransactionList, pageNumber, searchParams } = this.props;
-    requrestTransactionList(searchParams, pageNumber - 1);
+    const { requestTransactionList, pageNumber, searchParams } = this.props;
+    requestTransactionList(searchParams, pageNumber - 1);
   };
   render() {
     const { loading, pageNumber, hasNext } = this.props;

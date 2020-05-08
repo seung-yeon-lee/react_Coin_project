@@ -21,14 +21,18 @@ class FormProvider extends React.PureComponent {
     e.preventDefault();
     if (Object.values(errors).length === 0) {
       this.props.onSubmit(values); // props로 받은 onSubmit()
+      // console.log(values);
+      // console.log(this.props.onSubmit);
     }
   };
-  onChange = (name, updatedValue) => {
+
+  onChange = (name, updateVal) => {
     this.validate(this.state.values);
     this.setState(({ values }) => ({
       values: {
         ...values,
-        [name]: updatedValue,
+        [name]: updateVal,
+        // userId: 내가정한id : Amount: 내가정한 금액
       },
     }));
   };

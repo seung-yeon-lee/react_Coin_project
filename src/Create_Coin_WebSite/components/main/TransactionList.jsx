@@ -8,12 +8,13 @@ import TransactionTable from './TransactionTable';
 import TransactionPaginationContainer from '../../containers/main/TransactionPaginationContainer';
 
 class TransactionList extends PureComponent {
-  componentDidMount() {
-    this.props.requestTransactionList();
+  // componentDidMount() {
+  //   this.props.requestTransactionList();
+  //   // routerEffects 미들웨어에서 목록 요청을 하고있기 떄문에 중복 호출 제거
 
-    // Api.get('/transactions').then(({ data }) => this.props.setTransactionList(data));
-    // //Api.get으로 데이터를 받아온 후 , set..액션함수를 이용하여 스토어 데이터 변경
-  }
+  //   // Api.get('/transactions').then(({ data }) => this.props.setTransactionList(data));
+  //   // //Api.get으로 데이터를 받아온 후 , set..액션함수를 이용하여 스토어 데이터 변경
+  // }
   render() {
     const { transactions, loading } = this.props;
     return (
