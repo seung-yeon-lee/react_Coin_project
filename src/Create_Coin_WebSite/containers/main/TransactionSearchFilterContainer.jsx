@@ -21,3 +21,4 @@ export default connect(mapStateToProps)(TransactionSearchFilter);
 // 현재 데이터 컴포넌트에서 스토어에있는 입력값을 전달 받은 후 그 값을 초깃값으로 지정
 
 // 화면컴포넌트 searchFilter.js를 수정하기 =>
+// Form 컴포넌트의 초깃값 (initValues)을 props로 받아온 값으로 사용 할 예정
