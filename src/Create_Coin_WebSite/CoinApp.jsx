@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import AppLayout from './components/AppLayout';
-import MainPage from './components/main/MainPage';
+import MainPage from './CodeSplitting/AsyncMainPage';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //리덕스 스토어는 앱 전체에 한개만 사용하므로 최상단 컴포넌트에 추가
@@ -33,3 +33,5 @@ class CoinApp extends PureComponent {
 }
 
 export default CoinApp;
+
+// next js, firebase deploy, server side rendering

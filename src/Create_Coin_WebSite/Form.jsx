@@ -21,8 +21,8 @@ class FormProvider extends React.PureComponent {
     e.preventDefault();
     if (Object.values(errors).length === 0) {
       this.props.onSubmit(values); // props로 받은 onSubmit()
-      // console.log(values);
-      // console.log(this.props.onSubmit);
+      // console.log(this.props.onSubmit, values);
+      // console.log(Object.values(errors).length);
     }
   };
 
